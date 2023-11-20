@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Coderhouse 47780 - Cursos</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h1 style="color:orange;">
+  Cursos
+</h1>
+<a href="{% url 'lista_cursos' %}">Ver todos</a>
+<a href="{% url 'crear_curso' %}">Crear curso</a>
+<br><br>
+<form action="{% url 'buscar_cursos' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="busqueda">
+  <input type="submit" value="Buscar">
+</form>
+<br>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Comision</th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for curso in cursos %}
+    <tr>
+      <td>{{ curso.id }}</td>
+      <td>{{ curso.nombre }}</td>
+      <td>{{ curso.comision }}</td>
+      <td>
+        {% if user == curso.creador %}
+        <a class="btn btn-link" href="{% url 'editar_curso' curso.id %}">editar</a>
+        {% endif %}
+      </td>
+      <td>
+        {% if user == curso.creador %}
+        <form action="{% url 'eliminar_curso' curso.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-link" value="eliminar"/>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock contenido %}
