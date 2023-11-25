@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Curso(models.Model):
+class curso(models.Model):
     # los atributos de clase (son las columnas de la tabla)
     nombre = models.CharField(max_length=64)
     comision = models.IntegerField()

@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from control_estudios.forms import CursoFormulario
-from control_estudios.models import Estudiante, Curso
+from control_estudios.forms import cursoFormulario
+from control_estudios.models import Estudiante, curso
 
 @login_required
 def listar_estudiantes(request):
@@ -26,7 +26,7 @@ def listar_estudiantes(request):
 def listar_cursos(request):
     # Data de pruebas, más adelante la llenaremos con nuestros cursos de verdad
     contexto = {
-        "cursos": Curso.objects.all(),
+        "cursos": curso.objects.all(),
     }
     http_response = render(
         request=request,
@@ -42,7 +42,7 @@ def crear_curso_version_1(request):
         data = request.POST  # request.POST es un diccionario
 
         # creo un curso en memoria RAM
-        curso = Curso(nombre=data['nombre'], comision=data['comision'])
+        curso = curso(nombre=data['nombre'], comision=data['comision'])
 
         # .save lo guarda en la base de datos
         curso.save()
@@ -64,14 +64,14 @@ def crear_curso(request):
     if request.method == "POST":
         # Guardado de datos
         # Creo un objeto formulario con la data que envio el usuario
-        formulario = CursoFormulario(request.POST)
+        formulario = cursoFormulario(request.POST)
 
         if formulario.is_valid():
             data = formulario.cleaned_data  # es un diccionario
             nombre = data["nombre"]
             comision = data["comision"]
             # creo un curso en memoria RAM
-            curso = Curso(nombre=nombre, comision=comision, creador=request.user)
+            curso = curso(nombre=nombre, comision=comision, creador=request.user)
             # Lo guardan en la Base de datos
             curso.save()
 
@@ -80,7 +80,7 @@ def crear_curso(request):
             return redirect(url_exitosa)
     else:  # GET
         # Descargar formulario inicial
-        formulario = CursoFormulario()
+        formulario = cursoFormulario()
     http_response = render(
         request=request,
         template_name='control_estudios/formulario_curso.html',
@@ -94,9 +94,9 @@ def buscar_cursos(request):
         data = request.POST
         busqueda = data["busqueda"]
         # Filtro simple
-        # cursos = Curso.objects.filter(comision__contains=busqueda)
+        # cursos = curso.objects.filter(comision__contains=busqueda)
         # Ejemplo filtro avanzado
-        cursos = Curso.objects.filter(
+        cursos = curso.objects.filter(
             Q(nombre__icontains=busqueda) | Q(comision__contains=busqueda)
         )
 
@@ -114,7 +114,7 @@ def buscar_cursos(request):
 @login_required
 def eliminar_curso(request, id):
     # obtienes el curso de la base de datos
-    curso = Curso.objects.get(id=id)
+    curso = curso.objects.get(id=id)
     if request.method == "POST":
         # borra el curso de la base de datos
         curso.delete()
@@ -125,10 +125,10 @@ def eliminar_curso(request, id):
 
 @login_required
 def editar_curso(request, id):
-    curso = Curso.objects.get(id=id)
+    curso = curso.objects.get(id=id)
     if request.method == "POST":
         # Actualizacion de datos
-        formulario = CursoFormulario(request.POST)
+        formulario = cursoFormulario(request.POST)
 
         if formulario.is_valid():
             data = formulario.cleaned_data
@@ -146,7 +146,7 @@ def editar_curso(request, id):
             'nombre': curso.nombre,
             'comision': curso.comision,
         }
-        formulario = CursoFormulario(initial=inicial)
+        formulario = cursoFormulario(initial=inicial)
     return render(
         request=request,
         template_name='control_estudios/formulario_curso.html',

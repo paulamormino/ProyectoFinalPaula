@@ -24,10 +24,10 @@
         <!-- Navigation (header)-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'lista_estudiantes' %}">Estudiantes</a>
-                <a class="navbar-brand" href="{% url 'lista_cursos' %}">Cursos</a>
-                <a class="navbar-brand" href="https://www.google.com">Google</a>
+                <a class="navbar-brand" href="{% url 'lista_cursos' %}">Noticias</a>
+                <a class="navbar-brand" href="{% url 'lista_estudiantes' %}">Periodistas</a>
+                <a class="navbar-brand" href="{% url 'inicio' %}">Acerca de mi</a>
+                <a class="navbar-brand" href="https://www.clima.com/argentina/buenos-aires/buenos-aires">Clima</a>
                 {% if user.is_authenticated %}
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,18 +71,18 @@
                             <li class="list-inline-item"><a href="#!">Contacto</a></li>
                       
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Curso de Python - CoderHouse.</p>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Noticias Argentinas - CoderHouse.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item me-4">
-                                <a href="https://www.facebook.com/Coderhouse/"><i class="bi-facebook fs-3"></i></a>
+                                <a href="https://www.facebook.com/Infobae/"><i class="bi-facebook fs-3"></i></a>
                             </li>
                             <li class="list-inline-item me-4">
-                                <a href="https://twitter.com/coderhouse"><i class="bi-twitter fs-3"></i></a>
+                                <a href="https://twitter.com/infobae"><i class="bi-twitter fs-3"></i></a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="https://www.instagram.com/coderhouse"><i class="bi-instagram fs-3"></i></a>
+                                <a href="https://www.instagram.com/infobae/"><i class="bi-instagram fs-3"></i></a>
                             </li>
                         </ul>
                     </div>

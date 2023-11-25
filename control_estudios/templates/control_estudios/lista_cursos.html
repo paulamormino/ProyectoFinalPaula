@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-<title>Coderhouse 47780 - Cursos</title>
+<title>Coderhouse 47780 - Proyecto Final</title>
 {% endblock titulo %}
 
 {% block contenido %}
-<h1 style="color:orange;">
-  Cursos
+<h1 style="color:pink;">
+  Noticias
 </h1>
-<a href="{% url 'lista_cursos' %}">Ver todos</a>
-<a href="{% url 'crear_curso' %}">Crear curso</a>
+<a href="{% url 'lista_cursos' %}">Ver todas</a>
+<a href="{% url 'crear_curso' %}">Crear Noticia</a>
 <br><br>
 <form action="{% url 'buscar_cursos' %}" method="post">
   {% csrf_token %}
@@ -21,9 +21,9 @@
 <table class="table">
   <tbody>
     <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Comision</th>
+      <th>Fecha</th>
+      <th>Titulo informe</th>
+      <th>Detalle</th>
       <th></th>
       <th></th>
     </tr>
