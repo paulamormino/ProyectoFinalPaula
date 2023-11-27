@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from control_estudios.forms import cursoFormulario
 from control_estudios.models import Estudiante, curso
 
+
 @login_required
 def listar_estudiantes(request):
     # No usado
@@ -71,9 +72,9 @@ def crear_curso(request):
             nombre = data["nombre"]
             comision = data["comision"]
             # creo un curso en memoria RAM
-            curso = curso(nombre=nombre, comision=comision, creador=request.user)
+            nuevo_curso = curso(nombre=nombre, comision=comision, creador=request.user)
             # Lo guardan en la Base de datos
-            curso.save()
+            nuevo_curso.save()
 
             # Redirecciono al usuario a la lista de cursos
             url_exitosa = reverse('lista_cursos')  # estudios/cursos/
@@ -114,10 +115,10 @@ def buscar_cursos(request):
 @login_required
 def eliminar_curso(request, id):
     # obtienes el curso de la base de datos
-    curso = curso.objects.get(id=id)
+    curso_eliminar = curso.objects.get(id=id)
     if request.method == "POST":
         # borra el curso de la base de datos
-        curso.delete()
+        curso_eliminar.delete()
         # redireccionamos a la URL exitosa
         url_exitosa = reverse('lista_cursos')
         return redirect(url_exitosa)
@@ -125,35 +126,32 @@ def eliminar_curso(request, id):
 
 @login_required
 def editar_curso(request, id):
-    curso = curso.objects.get(id=id)
+    curso_editar = curso.objects.get(id=id)
     if request.method == "POST":
-        # Actualizacion de datos
         formulario = cursoFormulario(request.POST)
 
         if formulario.is_valid():
             data = formulario.cleaned_data
-            # modificamos el objeto en memoria RAM
-            curso.nombre = data['nombre']
-            curso.comision = data['comision']
-            # Los cambios se guardan en la Base de datos
-            curso.save()
+            curso_editar.nombre = data['nombre']
+            curso_editar.comision = data['comision']
+            curso_editar.save()
 
             url_exitosa = reverse('lista_cursos')
             return redirect(url_exitosa)
     else:  # GET
-        # Descargar formulario con data actual
+        # Obtener datos actuales del curso_editar y prellenar el formulario
         inicial = {
-            'nombre': curso.nombre,
-            'comision': curso.comision,
+            'nombre': curso_editar.nombre,
+            'comision': curso_editar.comision,
         }
         formulario = cursoFormulario(initial=inicial)
+        
     return render(
         request=request,
         template_name='control_estudios/formulario_curso.html',
         context={'formulario': formulario},
     )
-
-
+    
 # Vistas de estudiantes (basadas en clases)
 class EstudianteListView(LoginRequiredMixin, ListView):
     model = Estudiante
@@ -189,3 +187,4 @@ class EstudianteUpdateView(LoginRequiredMixin, UpdateView):
 class EstudianteDeleteView(LoginRequiredMixin, DeleteView):
     model = Estudiante
     success_url = reverse_lazy('lista_estudiantes')
+    

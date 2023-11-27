@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class curso(models.Model):
     # los atributos de clase (son las columnas de la tabla)
     nombre = models.CharField(max_length=64)
-    comision = models.IntegerField()
+    comision = models.CharField(max_length=400)
     creador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):

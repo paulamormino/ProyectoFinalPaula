@@ -1,18 +1,18 @@
-# ProyectoCoder
+# Instrucciones para Configurar el ProyectoCoder en Local
 
-## Instrucciones instalar proyecto en local
-+ Crea una carpeta contenedora madre
-+ Abre la consola y ubicate en la carpeta madre
-+ Clona este proyecto en la carpeta madre
-+ Entra en la carpeta que acabas de clonar
-+ Para instalar las dependencias corre este comando:
+## Pasos para la Instalación del Proyecto en tu Máquina Local
++ Crea una carpeta principal como contenedor del proyecto.
++ Abre la terminal y navega hasta la carpeta principal que has creado.
++ Clona este proyecto dentro de la carpeta principal que acabas de crear.
++ Accede a la carpeta recién clonada en tu sistema.
++ Para instalar todas las dependencias necesarias, ejecuta el siguiente comando en la terminal::
 
 ```
 pip install -r requirements.txt
 ```
 
-## Instrucciones para entrar al panel aministrativo de Django
-+ En consola, crear un superuser:
+## Acceso al Panel Administrativo de Django
++ En la terminal, crea un superusuario ejecutando el siguiente comando:
 ```
 python manage.py createsuperuser
 ```

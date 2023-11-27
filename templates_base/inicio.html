@@ -8,12 +8,12 @@
 {% block contenido %}
 {% if user.is_authenticated %}
 <h1>Bienvenido/a {{ user.last_name }}, {{ user.first_name }}</h1>
-<div>
-  <img src="{{ user.avatar.imagen.url }}" style="max-width: 300px;">
-</div>
 <h3>Hola, me llamo Paula Mormino</h3>
   <p>Soy estudiante de Coderhouse y este es mi proyecto final para el curso.</p>
   <p>Espero que lo disfruten, saludos!</p>
+  <div>
+    <img src="{{ user.avatar.imagen.url }}" style="max-width: 300px;">
+  </div>
 {% else %}
 <h1>Bienvenido/a visitante</h1>
 {% endif %}

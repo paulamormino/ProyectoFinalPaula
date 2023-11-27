@@ -20,4 +20,5 @@ urlpatterns = [
     path("crear-estudiante/", EstudianteCreateView.as_view(), name="crear_estudiante"),
     path("editar-estudiante/<int:pk>/", EstudianteUpdateView.as_view(), name="editar_estudiante"),
     path("eliminar-estudiante/<int:pk>/", EstudianteDeleteView.as_view(), name="eliminar_estudiante"),
+
 ]
